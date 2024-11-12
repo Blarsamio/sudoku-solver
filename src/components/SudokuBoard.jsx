@@ -4,8 +4,7 @@ import SudokuCell from "./SudokuCell";
 import SolveButton from "./SolveButton";
 import ResetButton from "./ResetButton";
 import { solveSudoku } from "../utils/sudokuSolver";
-import { findNextHint } from '../utils/hintSolver';
-
+import { findNextHint } from "../utils/hintSolver";
 
 const SudokuBoard = () => {
   const initialBoard = Array(9).fill(Array(9).fill(0));
@@ -13,7 +12,7 @@ const SudokuBoard = () => {
   const [displayBoard, setDisplayBoard] = useState(initialBoard);
   const [loading, setLoading] = useState(false);
   const [solved, setSolved] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [hintUsed, setHintUsed] = useState([]);
 
   const handleHint = () => {
@@ -38,7 +37,8 @@ const SudokuBoard = () => {
 
         const boxRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
         const boxCol = 3 * Math.floor(col / 3) + (i % 3);
-        if (board[boxRow][boxCol] === num && (boxRow !== row || boxCol !== col)) return false;
+        if (board[boxRow][boxCol] === num && (boxRow !== row || boxCol !== col))
+          return false;
       }
       return true;
     };
@@ -65,18 +65,20 @@ const SudokuBoard = () => {
   const handleInputChange = (row, col, value) => {
     if (/^[1-9]?$/.test(value)) {
       const newUserBoard = userBoard.map((rowArr, i) =>
-        rowArr.map((cell, j) => (i === row && j === col ? Number(value) || 0 : cell))
+        rowArr.map((cell, j) =>
+          i === row && j === col ? Number(value) || 0 : cell
+        )
       );
       setUserBoard(newUserBoard);
       setDisplayBoard(newUserBoard);
       setSolved(false);
-      setError('');
+      setError("");
     }
   };
 
   const handleSolve = () => {
     if (hasConflict(userBoard)) {
-      setError('Invalid board, check and try again.');
+      setError("Invalid board, check and try again.");
       return;
     }
 
@@ -99,7 +101,7 @@ const SudokuBoard = () => {
     setUserBoard(initialBoard);
     setDisplayBoard(initialBoard);
     setSolved(false);
-    setError('');
+    setError("");
     setHintUsed([]);
   };
 
@@ -117,7 +119,9 @@ const SudokuBoard = () => {
               onChange={handleInputChange}
               isUserInput={userBoard[rowIndex][colIndex] !== 0}
               solved={solved}
-              isHinted={hintUsed.some(cell => cell.row === rowIndex && cell.col === colIndex)}
+              isHinted={hintUsed.some(
+                (cell) => cell.row === rowIndex && cell.col === colIndex
+              )}
             />
           ))
         )}
@@ -128,7 +132,7 @@ const SudokuBoard = () => {
           <ResetButton onClick={handleReset} />
         </div>
         <a href="#" onClick={handleHint} className="p-4  text-white rounded">
-          Stuck? get a <span className='font-extrabold'>hint.</span>
+          Stuck? get a <span className="font-extrabold">hint.</span>
         </a>
       </div>
     </div>
