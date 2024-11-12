@@ -126,12 +126,12 @@ const SudokuBoard = () => {
           ))
         )}
       </div>
-      <div className="flex flex-col items-center space-x-2 mt-4">
+      <div className="flex flex-col items-center mt-4">
         <div className="flex space-x-2 mt-4">
           <SolveButton onClick={handleSolve} loading={loading} />
           <ResetButton onClick={handleReset} />
         </div>
-        <a href="#" onClick={handleHint} className="p-4  text-white rounded">
+        <a href="#" onClick={handleHint} className="p-4  text-white rounded ml-0">
           Stuck? get a <span className="font-extrabold">hint.</span>
         </a>
       </div>
