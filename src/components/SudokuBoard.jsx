@@ -1,10 +1,12 @@
 // src/components/SudokuBoard.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import SudokuCell from "./SudokuCell";
 import SolveButton from "./SolveButton";
 import ResetButton from "./ResetButton";
 import { solveSudoku } from "../utils/sudokuSolver";
 import { findNextHint } from "../utils/hintSolver";
+import { PropTypes } from "prop-types";
+
 
 const SudokuBoard = () => {
   const initialBoard = Array(9).fill(Array(9).fill(0));
@@ -108,7 +110,7 @@ const SudokuBoard = () => {
   return (
     <div className="flex flex-col items-center">
       {error && <div className="text-red-500 mb-2">{error}</div>}
-      <div className="grid grid-cols-9 gap-1 justify-center">
+      <div className="grid grid-cols-9 gap-0">
         {displayBoard.map((row, rowIndex) =>
           row.map((value, colIndex) => (
             <SudokuCell
@@ -132,7 +134,7 @@ const SudokuBoard = () => {
           <ResetButton onClick={handleReset} />
         </div>
         <a href="#" onClick={handleHint} className="p-4  text-white rounded ml-0">
-          Stuck? get a <span className="font-extrabold">hint.</span>
+          Stuck? get a <span className="font-extrabold text-yellow-300">hint.</span>
         </a>
       </div>
     </div>
@@ -140,3 +142,13 @@ const SudokuBoard = () => {
 };
 
 export default SudokuBoard;
+
+SudokuBoard.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  row: PropTypes.number,
+  col: PropTypes.number,
+  isUserInput: PropTypes.bool,
+  solved: PropTypes.bool,
+  isHinted: PropTypes.bool,
+};

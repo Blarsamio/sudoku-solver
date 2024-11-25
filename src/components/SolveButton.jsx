@@ -1,5 +1,5 @@
 // src/components/SolveButton.jsx
-import React from "react";
+import { PropTypes } from "prop-types";
 
 const SolveButton = ({
   onClick,
@@ -21,3 +21,10 @@ const SolveButton = ({
 };
 
 export default SolveButton;
+
+SolveButton.propTypes = {
+  onClick: PropTypes.func,
+  label: PropTypes.string,
+  loading: PropTypes.bool,
+  className: PropTypes.string,
+};

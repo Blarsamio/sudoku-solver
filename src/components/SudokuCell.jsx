@@ -1,5 +1,5 @@
 // src/components/SudokuCell.jsx
-import React from "react";
+import { PropTypes } from "prop-types";
 
 const SudokuCell = ({
   value,
@@ -10,20 +10,21 @@ const SudokuCell = ({
   solved,
   isHinted,
 }) => {
-  const marginClass = `
-    ${row === 3 || row === 6 ? "mt-1" : "mt-0"}
-    ${col === 3 || col === 6 ? "ml-1" : "ml-0"}
-  `;
-
-  const textColorClass = solved && isUserInput ? "text-neutral-600" : "text-acc-2";
-  const hintClass = isHinted ? "bg-neutral-500" : "";
+  const textColorClass = solved && isUserInput ? "text-acc-1" : "text-acc-3";
+  const hintClass = isHinted ? "text-yellow-300" : "";
 
   return (
     <input
       type="text"
       maxLength="1"
-      className={`w-10 h-10 text-2xl font-bold text-white text-center rounded border bg-acc-8 border-acc-7 ${marginClass} focus:outline-none focus:ring-1 focus:ring-acc-1
-                  hover:bg-acc-6 transition-colors ${textColorClass} ${hintClass}`}
+      className={`
+        w-12 h-12 flex items-center justify-center text-lg font-bold bg-transparent border
+        border-acc-6 text-center ${textColorClass} ${hintClass} hover:bg-acc-7 focus:bg-acc-7 focus:text-acc-3
+        ${col % 3 === 0 ? 'border-l-2 border-l-acc-1' : 'border-l'}
+        ${row % 3 === 0 ? 'border-t-2 border-t-acc-1' : 'border-t'}
+        ${col === 8 ? 'border-r-2 border-r-acc-1' : ''}
+        ${row === 8 ? 'border-b-2 border-b-acc-1' : ''}
+      `}
       value={value === 0 ? "" : value}
       onChange={(e) => onChange(row, col, e.target.value)}
     />
@@ -31,3 +32,13 @@ const SudokuCell = ({
 };
 
 export default SudokuCell;
+
+SudokuCell.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  row: PropTypes.number,
+  col: PropTypes.number,
+  isUserInput: PropTypes.bool,
+  solved: PropTypes.bool,
+  isHinted: PropTypes.bool,
+};

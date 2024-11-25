@@ -1,5 +1,4 @@
 // src/App.jsx
-import React from "react";
 import SudokuBoard from "./components/SudokuBoard";
 
 const App = () => {

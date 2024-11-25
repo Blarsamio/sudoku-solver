@@ -1,5 +1,5 @@
 // src/components/ResetButton.jsx
-import React from "react";
+import { PropTypes } from "prop-types";
 
 const ResetButton = ({ onClick, className = "" }) => {
   return (
@@ -13,3 +13,8 @@ const ResetButton = ({ onClick, className = "" }) => {
 };
 
 export default ResetButton;
+
+ResetButton.propTypes = {
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+};
